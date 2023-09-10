@@ -1,0 +1,6 @@
+<!-- res/values/attrs.xml -->
+<resources>
+    <declare-styleable name="CustomEditText">
+        <attr name="customHint" format="string" />
+    </declare-styleable>
+</resources>
