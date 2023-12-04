@@ -7,6 +7,33 @@
     tools:context=".ui.Prestamos"
     android:padding="5dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/eTfiltrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/btn_blanco"
+            android:clickable="true"
+            android:drawableRight="@android:drawable/ic_menu_search"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="Filtrar"
+            android:inputType="text"
+            android:padding="5dp"
+            android:text="" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabQR"

@@ -1,14 +1,19 @@
 package com.mobmasterp.bienestarapp;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -20,6 +25,8 @@ import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
+
+import java.util.List;
 
 public class FuncionesGenerales {
     Context context;
@@ -64,11 +71,24 @@ public class FuncionesGenerales {
         }
     }
 
-
-
-    private int obtenerAnchoPantalla() {
+    public int obtenerAnchoPantalla() {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.widthPixels;
+    }
+
+    public void dialogSpinner(EditText eT, List<String> list){
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.spinner_layout);
+        ListView listView = (ListView)dialog.findViewById(R.id.lvSp);
+        listView.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, list));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                eT.setText(list.get(i));
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
