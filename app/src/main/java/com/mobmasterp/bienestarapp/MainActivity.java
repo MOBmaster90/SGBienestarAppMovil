@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.mobmasterp.bienestarapp.Interface.UsuarioAPI;
 import com.mobmasterp.bienestarapp.Modelos.AuthRequest;
 import com.mobmasterp.bienestarapp.Modelos.AuthUsuario;
@@ -75,9 +77,12 @@ public class MainActivity extends AppCompatActivity {
                                     fg.WriteSharedPreferences("USUARIO", usuario);
                                     fg.WriteSharedPreferences("PASS", pass);
                                 }
-                                Log.i("PRUEBA", response.body().getToken());
-                                Claims claims = decodeJWT(response.body().getToken(), "SistemaGestionBienestar2023*");
-                                Log.i("PRUEBA", "  Claims: " + claims);
+                                Claims claims = decodeJWT(response.body().getToken(), "SistemaGestionBienestar2023_2712267*");
+                                Gson gson = new Gson();
+                                String jsonClaims = gson.toJson(claims);
+                                Intent intent = new Intent(MainActivity.this, Principal.class);
+                                intent.putExtra("Usuario", jsonClaims);
+                                startActivity(intent);
                             }else{
                                 Log.i("PRUEBA", "ERROR :::: " + response.errorBody());
                             }

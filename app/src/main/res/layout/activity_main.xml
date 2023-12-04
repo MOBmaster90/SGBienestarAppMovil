@@ -14,7 +14,7 @@
         android:src="@mipmap/logo_bienestar"
         android:padding="20dp"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="80dp"/>
+        android:layout_marginBottom="20dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -34,7 +34,8 @@
             android:layout_marginRight="50dp"
             android:gravity="center"
             android:drawableLeft="@drawable/mail"
-            android:hint="Correo Institucional*"/>
+            android:hint="Correo Institucional*"
+            android:text="mososrio@sena.edu.co"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,7 +58,8 @@
             android:gravity="center"
             android:password="true"
             android:drawableLeft="@drawable/lock"
-            android:hint="Contraseña*" />
+            android:hint="Contraseña*"
+            android:text="Michel123@"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
@@ -113,7 +115,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="30dp">
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
