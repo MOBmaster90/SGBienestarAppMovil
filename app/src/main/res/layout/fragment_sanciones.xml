@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Prestamos"
+    tools:context=".ui.Sanciones"
     android:padding="5dp">
 
     <LinearLayout
@@ -33,14 +33,12 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabQR"
+        android:id="@+id/fabFiltrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/qr"/>
+        app:srcCompat="@android:drawable/ic_menu_search"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -11,6 +11,7 @@ public class UsuarioModel {
     private String correo_pers;
     private String nacimiento;
     private RolUsuarioModel rol;
+    private FichaUsuarioModel ficha;
     private String direccion;
     private String rh;
     private String eps;
@@ -100,6 +101,14 @@ public class UsuarioModel {
 
     public void setRol(RolUsuarioModel rol) {
         this.rol = rol;
+    }
+
+    public FichaUsuarioModel getFicha() {
+        return ficha;
+    }
+
+    public void setFicha(FichaUsuarioModel ficha) {
+        this.ficha = ficha;
     }
 
     public String getDireccion() {
@@ -218,6 +227,165 @@ public class UsuarioModel {
 
         public void setDuracion_prestamo(int duracion_prestamo) {
             this.duracion_prestamo = duracion_prestamo;
+        }
+    }
+
+    public class FichaUsuarioModel{
+        private String _id;
+        private String codigo;
+        private ProgramaUsuarioModel programa;
+        private String jornada;
+        private String fecha_inicio;
+        private String fecha_fin;
+        private String createdAt;
+        private String updatedAt;
+        private int __v;
+
+        public String get_id() {
+            return _id;
+        }
+
+        public void set_id(String _id) {
+            this._id = _id;
+        }
+
+        public String getCodigo() {
+            return codigo;
+        }
+
+        public void setCodigo(String codigo) {
+            this.codigo = codigo;
+        }
+
+        public ProgramaUsuarioModel getPrograma() {
+            return programa;
+        }
+
+        public void setPrograma(ProgramaUsuarioModel programa) {
+            this.programa = programa;
+        }
+
+        public String getJornada() {
+            return jornada;
+        }
+
+        public void setJornada(String jornada) {
+            this.jornada = jornada;
+        }
+
+        public String getFecha_inicio() {
+            return fecha_inicio;
+        }
+
+        public void setFecha_inicio(String fecha_inicio) {
+            this.fecha_inicio = fecha_inicio;
+        }
+
+        public String getFecha_fin() {
+            return fecha_fin;
+        }
+
+        public void setFecha_fin(String fecha_fin) {
+            this.fecha_fin = fecha_fin;
+        }
+
+        public String getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public String getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(String updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+
+        public int get__v() {
+            return __v;
+        }
+
+        public void set__v(int __v) {
+            this.__v = __v;
+        }
+    }
+
+    public class ProgramaUsuarioModel{
+        private String _id;
+        private String codigo;
+        private String version;
+        private String nombre;
+        private String nivel;
+        private String createdAt;
+        private String updatedAt;
+        private int __v;
+
+        public String get_id() {
+            return _id;
+        }
+
+        public void set_id(String _id) {
+            this._id = _id;
+        }
+
+        public String getCodigo() {
+            return codigo;
+        }
+
+        public void setCodigo(String codigo) {
+            this.codigo = codigo;
+        }
+
+        public String getVersion() {
+            return version;
+        }
+
+        public void setVersion(String version) {
+            this.version = version;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public String getNivel() {
+            return nivel;
+        }
+
+        public void setNivel(String nivel) {
+            this.nivel = nivel;
+        }
+
+        public String getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public String getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(String updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+
+        public int get__v() {
+            return __v;
+        }
+
+        public void set__v(int __v) {
+            this.__v = __v;
         }
     }
 }

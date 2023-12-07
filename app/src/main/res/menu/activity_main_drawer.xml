@@ -6,19 +6,35 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_prestamo"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Prestamo" />
+            android:icon="@drawable/prestamo"
+            android:title="Prestar" />
         <item
             android:id="@+id/nav_historial_prestamo"
-            android:icon="@android:drawable/ic_menu_agenda"
+            android:icon="@drawable/history"
             android:title="Historial de Prestamos" />
         <item
             android:id="@+id/nav_prestamos"
-            android:icon="@android:drawable/ic_menu_recent_history"
-            android:title="Prestamos" />
+            android:icon="@drawable/lista"
+            android:title="Lista de Prestamos" />
+        <item
+            android:id="@+id/nav_crear_usuario"
+            android:icon="@drawable/user"
+            android:title="Crear Usuario" />
+        <item
+            android:id="@+id/nav_sanciones"
+            android:icon="@drawable/sanciones"
+            android:title="Sanciones" />
+        <item
+            android:id="@+id/nav_mensajes"
+            android:icon="@drawable/message"
+            android:title="Mensajes" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/perfil"
+            android:title="Perfil de Usuario" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@android:drawable/ic_delete"
+            android:icon="@drawable/logout"
             android:title="Cerrar Sesión" />
     </group>
 </menu>

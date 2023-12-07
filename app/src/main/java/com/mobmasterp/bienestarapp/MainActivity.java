@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("Usuario", jsonClaims);
                                 startActivity(intent);
                             }else{
-                                Log.i("PRUEBA", "ERROR :::: " + response.errorBody());
+                                Log.i("PRUEBA", "ERROR :::: " + response.errorBody().charStream());
                             }
                         }
                         @Override

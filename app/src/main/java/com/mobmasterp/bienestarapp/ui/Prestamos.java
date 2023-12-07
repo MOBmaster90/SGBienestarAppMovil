@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,7 @@ import com.mobmasterp.bienestarapp.RV.AprobarPrestamosRV;
 import com.mobmasterp.bienestarapp.StringValues;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,6 +54,7 @@ public class Prestamos extends Fragment {
     StringValues stringValues = new StringValues();
 
     List<PrestamoGetModel> prestamoGetModels = new ArrayList<>();
+    List<PrestamoGetModel> prestamoGetModelsFiltrado = new ArrayList<>();
     AprobarPrestamosRV aprobarPrestamosRV;
 
     PrestamoAPI prestamoAPI = new ClienteAPI().getClient().create(PrestamoAPI.class);
@@ -58,6 +62,10 @@ public class Prestamos extends Fragment {
     FuncionesGenerales fg;
 
     List<String> ListaEstadoPrestamos = new ArrayList<>();
+
+    List<String> listaEstados = new ArrayList<>();
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +89,7 @@ public class Prestamos extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
         }
 
-        aprobarPrestamosRV = new AprobarPrestamosRV(getContext(), prestamoGetModels, new AprobarPrestamosRV.onClick() {
+        aprobarPrestamosRV = new AprobarPrestamosRV(getContext(), prestamoGetModelsFiltrado, new AprobarPrestamosRV.onClick() {
             @Override
             public void click(PrestamoGetModel pgm, int pos, int accion) {
                 switch (accion){
@@ -104,8 +112,6 @@ public class Prestamos extends Fragment {
             @Override
             public void onClick(View view) {
                 ListaEstadoPrestamos.clear();
-                // Falta permitir seleccionar varias opciones de filtro
-
                 for (PrestamoGetModel prestamoGetModel : prestamoGetModels) {
                     if(!ListaEstadoPrestamos.contains(prestamoGetModel.getEstado().getNombre())){
                         ListaEstadoPrestamos.add(prestamoGetModel.getEstado().getNombre());
@@ -113,6 +119,25 @@ public class Prestamos extends Fragment {
                 }
                 Collections.sort(ListaEstadoPrestamos);
                 fg.dialogSpinner(eTfiltrar, ListaEstadoPrestamos);
+            }
+        });
+
+        eTfiltrar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                listaEstados = new ArrayList<>();
+                try {
+                    listaEstados = Arrays.asList(eTfiltrar.getText().toString().split(", "));
+                }catch (Exception e){
+                    if(!eTfiltrar.getText().toString().isEmpty()){
+                        listaEstados.add(eTfiltrar.getText().toString());
+                    }
+                }
+                ActualizarVista();
             }
         });
 
@@ -136,7 +161,20 @@ public class Prestamos extends Fragment {
                 if(response.isSuccessful()){
                     prestamoGetModels.clear();
                     prestamoGetModels.addAll(response.body());
-                    Collections.reverse(prestamoGetModels);
+                    prestamoGetModelsFiltrado.clear();
+                    if(!listaEstados.isEmpty()){
+                        for (PrestamoGetModel prestamoGetModel : prestamoGetModels) {
+                            for(int i=0; i<listaEstados.size(); i++){
+                                if(prestamoGetModel.getEstado().getNombre().equals(listaEstados.get(i))){
+                                    prestamoGetModelsFiltrado.add(prestamoGetModel);
+                                    break;
+                                }
+                            }
+                        }
+                    }else{
+                        prestamoGetModelsFiltrado.addAll(prestamoGetModels);
+                    }
+                    Collections.reverse(prestamoGetModelsFiltrado);
                     aprobarPrestamosRV.notifyDataSetChanged();
                 }else{
                     Log.i("PRUEBA", "ERROR ::: " + response.errorBody().source());

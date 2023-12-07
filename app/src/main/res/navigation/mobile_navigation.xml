@@ -14,12 +14,36 @@
     <fragment
         android:id="@+id/nav_historial_prestamo"
         android:name="com.mobmasterp.bienestarapp.ui.HistorialPrestamos"
-        android:label="Historial Prestamo"
+        android:label="Historial de Prestamo"
         tools:layout="@layout/fragment_historial_prestamos" />
 
     <fragment
         android:id="@+id/nav_prestamos"
         android:name="com.mobmasterp.bienestarapp.ui.Prestamos"
-        android:label="Prestamos"
+        android:label="Lista de Prestamos"
         tools:layout="@layout/fragment_prestamos" />
+
+    <fragment
+        android:id="@+id/nav_crear_usuario"
+        android:name="com.mobmasterp.bienestarapp.ui.CrearUsuario"
+        android:label="Crear Usuario"
+        tools:layout="@layout/fragment_crear_usuario" />
+
+    <fragment
+        android:id="@+id/nav_mensajes"
+        android:name="com.mobmasterp.bienestarapp.ui.Mensajes"
+        android:label="Chat"
+        tools:layout="@layout/fragment_mensajes" />
+
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.mobmasterp.bienestarapp.ui.EditarPerfil"
+        android:label="Editar Perfil"
+        tools:layout="@layout/fragment_editar_perfil" />
+
+    <fragment
+        android:id="@+id/nav_sanciones"
+        android:name="com.mobmasterp.bienestarapp.ui.Sanciones"
+        android:label="Sanciones"
+        tools:layout="@layout/fragment_sanciones" />
 </navigation>

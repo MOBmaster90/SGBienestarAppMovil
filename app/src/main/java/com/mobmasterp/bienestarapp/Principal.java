@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.view.menu.MenuView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -44,12 +45,18 @@ public class Principal extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_prestamo,
                 R.id.nav_historial_prestamo,
-                R.id.nav_prestamos)
+                R.id.nav_prestamos,
+                R.id.nav_crear_usuario,
+                R.id.nav_sanciones,
+                R.id.nav_mensajes,
+                R.id.nav_perfil)
                 .setOpenableLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_principal);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -61,6 +68,17 @@ public class Principal extends AppCompatActivity {
         txtTituloNavHeader.setText(usuarioInfo.getNombre() + " " + usuarioInfo.getApellidos());
         txtDescNavHeader.setText(usuarioInfo.getCorreo_inst());
         txtRolNavHeader.setText(usuarioInfo.getRol());
+
+        Menu menu = navigationView.getMenu();
+        if(usuarioInfo.getPrivilegio() == 1){ // Administrador
+
+        }else if(usuarioInfo.getPrivilegio() == 2){ // Instructor
+            //menu.findItem(R.id.nav_prestamos).setVisible(false);
+        }else{ // Otro - Aprendiz
+            //menu.findItem(R.id.nav_prestamos).setVisible(false);
+        }
+
+
     }
 
     @Override
@@ -80,6 +98,6 @@ public class Principal extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        fg.WriteSharedPreferences("USUARIO_INFO", "");
+        //fg.WriteSharedPreferences("USUARIO_INFO", "");
     }
 }

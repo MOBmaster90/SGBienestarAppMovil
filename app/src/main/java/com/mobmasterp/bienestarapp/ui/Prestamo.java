@@ -1,6 +1,7 @@
 package com.mobmasterp.bienestarapp.ui;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -92,7 +94,20 @@ public class Prestamo extends Fragment {
             public void onClick(ImplementosModel im, int cantidad) {
 
             }
-        });
+        }, new ImplementosRV.OnItemLongClick() {
+            @Override
+            public void onLongClick(ImplementosModel im, int pos) {
+                fg.alertDialog("Quitar Implemento", "¿Esta seguro de quitar el implemento seleccionado del prestamo?", new FuncionesGenerales.OnClickAlertDialog() {
+                    @Override
+                    public void click(DialogInterface dialog, int which, boolean confirmar) {
+                        if(confirmar){
+                            implementosPrestamoLista.remove(pos);
+                            implementosPrestamoRV.notifyDataSetChanged();
+                        }
+                    }
+                });
+            }
+        }, usuarioInfo.getPrivilegio());
         rVImplementosPrestamo.setAdapter(implementosPrestamoRV);
         rVImplementosPrestamo.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -101,7 +116,15 @@ public class Prestamo extends Fragment {
             public void onClick(View v) {
                 lLQR.setVisibility(View.INVISIBLE);
                 rVImplementosPrestamo.setVisibility(View.VISIBLE);
-                addPrestamo();
+                if(usuarioInfo.getPrivilegio() == 3){
+                    if(implementosPrestamoRV.getItemCount() < 1){
+                        addPrestamo();
+                    }else{
+                        Toast.makeText(getContext(), "No puede prestar mas de un (1) implemento", Toast.LENGTH_LONG).show();
+                    }
+                }else{
+                    addPrestamo();
+                }
             }
         });
 
@@ -167,7 +190,12 @@ public class Prestamo extends Fragment {
                 implementosPrestamoRV.notifyDataSetChanged();
                 root.dismiss();
             }
-        });
+        }, new ImplementosRV.OnItemLongClick() {
+            @Override
+            public void onLongClick(ImplementosModel im, int pos) {
+
+            }
+        }, usuarioInfo.getPrivilegio());
         rVImplementos.setAdapter(implementosRV);
         rVImplementos.setLayoutManager(new LinearLayoutManager(getContext()));
 

@@ -27,11 +27,15 @@ public class ImplementosRV extends RecyclerView.Adapter<ImplementosRV.Implemento
     Context context;
     List<ImplementosModel> implementosModels;
     onItemClick itemClick;
+    OnItemLongClick itemLongClick;
+    int privilegio;
 
-    public ImplementosRV(Context context, List<ImplementosModel> implementosModel, onItemClick itemClick) {
+    public ImplementosRV(Context context, List<ImplementosModel> implementosModel, onItemClick itemClick, OnItemLongClick itemLongClick, int privilegio) {
         this.context = context;
         this.implementosModels = implementosModel;
         this.itemClick = itemClick;
+        this.itemLongClick = itemLongClick;
+        this.privilegio = privilegio;
     }
 
     @NonNull
@@ -68,10 +72,20 @@ public class ImplementosRV extends RecyclerView.Adapter<ImplementosRV.Implemento
             holder.spCant.setSelection(this.implementosModels.get(position).getCantidad_seleccionada());
         }
 
+        if(privilegio == 3){holder.spCant.setEnabled(false);}
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 itemClick.onClick(implementosModels.get(position), holder.spCant.getSelectedItemPosition());
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                itemLongClick.onLongClick(implementosModels.get(position), position);
+                return true;
             }
         });
     }
@@ -104,5 +118,8 @@ public class ImplementosRV extends RecyclerView.Adapter<ImplementosRV.Implemento
 
     public interface onItemClick{
         void onClick(ImplementosModel im, int cantidad);
+    }
+    public interface OnItemLongClick{
+        void onLongClick(ImplementosModel im, int pos);
     }
 }
