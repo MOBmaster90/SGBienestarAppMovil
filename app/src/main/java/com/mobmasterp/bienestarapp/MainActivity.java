@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                                 String jsonClaims = gson.toJson(claims);
                                 Intent intent = new Intent(MainActivity.this, Principal.class);
                                 intent.putExtra("Usuario", jsonClaims);
+                                fg = new FuncionesGenerales(MainActivity.this);
+                                fg.WriteSharedPreferences("USUARIO_INFO", jsonClaims);
                                 startActivity(intent);
                             }else{
                                 Log.i("PRUEBA", "ERROR :::: " + response.errorBody().charStream());

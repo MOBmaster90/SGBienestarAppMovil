@@ -1,34 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Mensajes"
-    android:padding="5dp">
+    android:padding="5dp"
+    tools:context=".ui.Mensajes">
+
+
+    <ScrollView
+        android:id="@+id/sview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/llmsgs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:gravity="center">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/eTmsg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="10"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"/>
+            android:inputType="textMultiLine" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imgSend"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/azul1_1"
             app:srcCompat="@android:drawable/ic_menu_send"
-            app:tint="@color/azul1"/>
+            app:tint="@color/azul1" />
     </LinearLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
